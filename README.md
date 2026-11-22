@@ -23,7 +23,7 @@ The pages only show data and collect input. That way the algorithms and basic fu
 
 ## Use of AI
 
-We used Claude to help plan, design and review this project. Every prompt, what we kept and what we changed is recorded in [`AI_LOG.md`](AI_LOG.md). The app itself uses no AI when it runs.
+We used Claude to help plan, design and review this project. Every prompt, what we kept and what we changed is recorded in [`AI_log.md`](AI_log.md). The app itself uses no AI when it runs.
 
 ---
 
