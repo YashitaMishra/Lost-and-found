@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments (each person makes their own)
+.venv/
+venv/
+env/
+
+# Secrets and local settings: never commit these
+.env
+*.pem
+
+# Django
+db.sqlite3
+/staticfiles/
+/media/
+*.log
+
+# Elastic Beanstalk
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
