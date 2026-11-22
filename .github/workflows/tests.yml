@@ -1,0 +1,51 @@
+name: Tests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # A throwaway PostgreSQL database just for the test run.
+    # If you switch to MySQL, swap this block (see the note in the thread).
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: lostfound_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    # Fake values for the test run only. Real keys never go here.
+    env:
+      SECRET_KEY: test-only-not-secret
+      DEBUG: "False"
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/lostfound_test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install packages
+        run: pip install -r requirements.txt
+
+      - name: Check for missing database changes
+        run: python manage.py makemigrations --check --dry-run
+
+      - name: Run the tests
+        run: python manage.py test
